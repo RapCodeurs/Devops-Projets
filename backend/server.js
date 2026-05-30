@@ -54,7 +54,7 @@ app.delete("/todos/:id", (req, res) => {
   res.json({ message: "Todo deleted" });
 });
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Changement encore - Serveur tourne sur http://localhost:${PORT}`);

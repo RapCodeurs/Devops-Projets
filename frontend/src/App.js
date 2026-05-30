@@ -9,7 +9,7 @@ function App() {
   const [editingId, setEditingId] = useState(null);
   const [editingText, setEditingText] = useState("");
 
-  const API = "http://localhost:5000/todos";
+  const API = import.meta.env.URL;
 
   const fetchTodos = async () => {
     const res = await axios.get(API);
