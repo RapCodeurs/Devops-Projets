@@ -9,7 +9,7 @@ function App() {
   const [editingId, setEditingId] = useState(null);
   const [editingText, setEditingText] = useState("");
 
-  const API = import.meta.env.URL;
+  const API = process.env.REACT_APP_API_URL;
 
   const fetchTodos = async () => {
     const res = await axios.get(API);
