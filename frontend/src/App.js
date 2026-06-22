@@ -45,8 +45,8 @@ function App() {
     setEditingText(todo.text);
   };
 
-  let maurel = "Ne pas utiliser de variable ici";
-  console.log(maurel);
+  let Gervais = "Ne pas utiliser de variable ici";
+
 
   const saveEdit = async (id) => {
     await axios.put(`${API}/${id}`, {
