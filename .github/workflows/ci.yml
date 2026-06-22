@@ -1,0 +1,46 @@
+name : build-and-lint
+
+# Definir quand le workflow doit s'exécuter
+# Le workflow s'exécute sur les branches main et dev lors des événements push et pull_request.
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main, dev  ]
+
+# Definir les jobs pour le workflow (Multiple jobs)
+jobs:
+  build-and-lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+    
+      - name: Install backend dependencies
+        working-directory: ./backend
+        run: npm ci
+
+      - name: Lint backend
+        working-directory: ./backend
+        run: npm run lint -- --max-warnings=0
+
+      - name: Install frontend dependencies
+        working-directory: ./frontend
+        run: npm ci
+
+      - name: Lint frontend
+        working-directory: ./frontend
+        run: npm run lint -- --max-warnings=0
+      
+      - name: Build backend image
+        run: docker build -t backend ./backend
+      
+      - name: Build frontend image
+        run: docker build -t frontend ./frontend

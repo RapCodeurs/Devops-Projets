@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import "./App.css";
 
@@ -11,14 +11,14 @@ function App() {
 
   const API = process.env.REACT_APP_API_URL;
 
-  const fetchTodos = async () => {
+  const fetchTodos = useCallback(async () => {
     const res = await axios.get(API);
     setTodos(res.data);
-  };
+  }, [API]);
 
   useEffect(() => {
     fetchTodos();
-  }, []);
+  }, [fetchTodos]);
 
   const addTodo = async () => {
     if (!text.trim()) return;
@@ -44,6 +44,9 @@ function App() {
     setEditingId(todo.id);
     setEditingText(todo.text);
   };
+
+  let maurel = "Ne pas utiliser de variable ici";
+  console.log(maurel);
 
   const saveEdit = async (id) => {
     await axios.put(`${API}/${id}`, {

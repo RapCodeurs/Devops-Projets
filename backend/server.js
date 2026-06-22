@@ -1,5 +1,5 @@
-const express = require("express");
-const cors = require("cors");
+const express = require('express');
+const cors = require('cors');
 
 const app = express();
 
@@ -9,12 +9,13 @@ app.use(express.json());
 let todos = [];
 
 /* GET all todos */
-app.get("/todos", (req, res) => {
+app.get('/todos', (req, res, next) => {
+  next();
   res.json(todos);
 });
 
 /* CREATE todo */
-app.post("/todos", (req, res) => {
+app.post('/todos', (req, res) => {
   const todo = {
     id: Date.now(),
     text: req.body.text,
@@ -26,7 +27,7 @@ app.post("/todos", (req, res) => {
 });
 
 /* TOGGLE completed + UPDATE text */
-app.put("/todos/:id", (req, res) => {
+app.put('/todos/:id', (req, res) => {
   const id = Number(req.params.id);
 
   todos = todos.map((todo) =>
@@ -34,24 +35,21 @@ app.put("/todos/:id", (req, res) => {
       ? {
           ...todo,
           text: req.body.text ?? todo.text,
-          completed:
-            req.body.completed !== undefined
-              ? req.body.completed
-              : todo.completed,
+          completed: req.body.completed !== undefined ? req.body.completed : todo.completed,
         }
-      : todo
+      : todo,
   );
 
-  res.json({ message: "Todo updated" });
+  res.json({ message: 'Todo updated' });
 });
 
 /* DELETE todo */
-app.delete("/todos/:id", (req, res) => {
+app.delete('/todos/:id', (req, res) => {
   const id = Number(req.params.id);
 
   todos = todos.filter((todo) => todo.id !== id);
 
-  res.json({ message: "Todo deleted" });
+  res.json({ message: 'Todo deleted' });
 });
 
 const PORT = process.env.PORT || 5000;
