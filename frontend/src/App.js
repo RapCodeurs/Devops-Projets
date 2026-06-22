@@ -45,7 +45,8 @@ function App() {
     setEditingText(todo.text);
   };
 
-  let Gervais = "Ne pas utiliser de variable ici";
+  //let Gervais = "Ne pas utiliser de variable ici";
+  //console.log(Gervais);
 
 
   const saveEdit = async (id) => {
