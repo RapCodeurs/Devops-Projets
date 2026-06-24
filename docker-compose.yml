@@ -9,7 +9,10 @@ services:
       - "5000:5000"
   
   frontend:
-    build: ./frontend
+    build: 
+      context: ./frontend
+      args: 
+        REACT_APP_API_URL: http://18.203.248.160:5000/api
     container_name: frontend-v3
     restart: always
     ports:
