@@ -18,7 +18,7 @@ const readTodosFromFile = () => {
     }
     const data = fs.readFileSync(FILE_PATH, 'utf8');
     return JSON.parse(data || '[]');
-  } catch (error) {
+  } catch {
     return [];
   }
 };
