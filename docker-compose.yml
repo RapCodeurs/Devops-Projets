@@ -12,7 +12,7 @@ services:
     build: 
       context: ./frontend
       args: 
-        REACT_APP_API_URL: http://18.203.248.160:5000/api
+        REACT_APP_API_URL: http://18.203.248.160:5000/todos
     container_name: frontend-v3
     restart: always
     ports:
